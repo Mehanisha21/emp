@@ -1,0 +1,58 @@
+<div class="login-wrapper">
+  <div class="login-left"></div>
+  <div class="login-right">
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="login-form" novalidate>
+      <h2 class="login-title">Login</h2>
+
+      <div class="form-group">
+        <input
+          id="username"
+          name="username"
+          type="text"
+          [(ngModel)]="username"
+          required
+          #usernameInput="ngModel"
+          placeholder="&#x1F464; Enter your username"
+          autocomplete="username"
+          class="form-input"
+        />
+        <div *ngIf="usernameInput.invalid && usernameInput.touched" class="validation-error">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          id="password"
+          name="password"
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          required
+          #passwordInput="ngModel"
+          placeholder="&#x1F512; Enter your password"
+          autocomplete="current-password"
+          class="form-input"
+        />
+        <button type="button" class="toggle-password" (click)="togglePassword()" aria-label="Toggle password visibility">
+          {{ showPassword ? 'Hide' : 'Show' }}
+        </button>
+        <div *ngIf="passwordInput.invalid && passwordInput.touched" class="validation-error">
+          Password is required.
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label>
+          <input type="checkbox" name="rememberMe" />
+          Remember me
+        </label>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <button type="submit" [disabled]="loading || loginForm.invalid" class="login-button">
+        {{ loading ? 'Logging in...' : 'Login Now' }}
+      </button>
+    </form>
+  </div>
+</div>
