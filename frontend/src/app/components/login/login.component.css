@@ -1,3 +1,14 @@
+/* Hide password reveal buttons for various browsers */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-reveal,
+input[type="password"]::-webkit-input-decoration-container,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+
 .login-wrapper {
   display: flex;
   min-height: 100vh;
@@ -8,7 +19,6 @@
   flex: 1;
   background: url('/assets/images/login.jpg') no-repeat center center;
   background-size: cover;
-  position: relative;
 }
 
 .login-left::before {
@@ -44,7 +54,7 @@
   transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s ease;
 }
 .login-form:hover, .login-form:focus-within {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(195, 194, 194, 0.9);
   box-shadow:
     0 12px 48px 0 rgba(31, 38, 135, 0.65),
     0 0 15px 3px rgba(64, 255, 255, 0.35),
@@ -77,64 +87,90 @@
   background: #fff9;
 }
 
+
+/* Form Styling */
+form {
+    width: 100%;
+}
+
 .form-group {
-  margin-bottom: 1.4rem;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 24px; /* Slightly reduced margin */
+    position: relative;
 }
 
-.form-label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-weight: 600;
-  color: #1f2937; /* Darker label text */
-  letter-spacing: 0.5px;
+.form-group label {
+    display: block;
+    font-size: 14px; /* Slightly smaller label */
+    color: #e0e0e0; /* Lighter label color */
+    margin-bottom: 7px; /* Slightly reduced margin */
+    font-weight: 500;
 }
 
-.form-input {
-  width: 100%;
-  padding: 0.6rem 0.95rem;
-  border: 1.3px solid rgba(0,0,0,0.2);
-  border-radius: 8px;
-  font-size: 1.07rem;
-  background: #f9fafb;
-  color: #111827;
-  transition: background 0.28s, box-shadow 0.24s;
-  box-shadow: none;
-  outline: none;
+.form-group .icon {
+    margin-right: 1px;
+    font-size: 13px; /* Slightly smaller icon */
 }
 
-.form-input:focus {
-  background: #fff;
-  box-shadow: 0 0 0 2px #3b82f6;
-  border: 1.3px solid #3b82f6;
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px 13px 15px; /* Slightly reduced padding */
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px; /* Slightly less rounded corners */
+    background: rgba(255, 255, 255, 0.08); /* More transparent background */
+    color: #f9fafb;
+    font-size: 1rem; /* Slightly smaller font size */
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+    position: relative;
 }
 
-.form-input::placeholder {
-  color: #6b7280;
-  opacity: 1;
+.form-group input.invalid {
+    border-color: #ff9999; /* Lighter error border */
+    background: rgba(255, 153, 153, 0.15); /* Lighter error background */
 }
 
-.password-group {
-  position: relative;
+.form-group input::placeholder {
+    color: #d1d5db;
+    font-size: 15px;
 }
 
-.password-wrapper {
-  display: flex;
-  align-items: center;
+.form-group input:focus {
+  border-color: #3b82f6;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px #3b82f6aa;
+}
+
+.password-input-wrapper {
+    position: relative;
 }
 
 .toggle-password {
-  background: none;
-  border: none;
-  margin-left: 0.7em;
-  color: #6b7280;
-  font-size: 1.07rem;
-  cursor: pointer;
-  transition: color 0.2s;
+    position: absolute;
+    top: 50%;
+    right: 12px; /* Adjusted right position */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 28px; /* Slightly smaller touch target */
+    width: 28px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.7); /* Lighter icon color */
+    transition: color 0.2s;
 }
 
 .toggle-password:hover {
-  color: #2563eb;
-  text-decoration: underline;
+   color: #ffffff;
+}
+
+.toggle-password svg {
+    display: block;
 }
 
 .validation-error,
@@ -182,5 +218,7 @@ button.login-button:disabled {
 }
 .login-form .form-bottom a:hover {
   color: #2563eb;
+  text-decoration: none;
+  
 }
 

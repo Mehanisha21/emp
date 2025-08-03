@@ -1,6 +1,5 @@
 .wide-payslip-bg {
   min-height: 100vh;
-  background: linear-gradient(120deg,#e0f7fa 60%,#d3cce3 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +12,7 @@
   box-shadow: 0 8px 44px #205b9c14, 0 2px 12px #397ac70a;
   backdrop-filter: blur(10px) saturate(117%);
   padding: 2.15rem 3.3rem 1.7rem 3.3rem;
-  max-width: 650px;
+  max-width: 800px;
   width: 100%;
   margin-bottom: 2.5rem;
   border: 1.4px solid #182f4455;
@@ -110,20 +109,15 @@
   color: #1372ba;
   font-weight: 600;
   letter-spacing: 0.01em;
-  text-align: left;
-  min-width: 42%;
   opacity: 0.97;
 }
 .field-value {
   color: #223154;
-  text-align: right;
   font-weight: 600;
   font-size: 1.14em;
   opacity: 0.97;
-  max-width: 53%;
-  word-break: break-word;
-  padding-left: .6em;
 }
+
 .total-value {
   color: #16a876;
   font-weight: 800;

@@ -1,13 +1,21 @@
-<div class="leave-data-wrapper">
+<ng-template #loadingOrError>
+  <div class="leave-details-card" style="text-align: center">
+    <div *ngIf="errorMessage; else loading" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <ng-template #loading>
+      <div class="loading-leave">Loading leave data...</div>
+    </ng-template>
+  </div>
+</ng-template>
+
+<!-- Main Content Display -->
+<div class="leave-data-wrapper" *ngIf="!errorMessage && leaves.length > 0; else loadingOrError">
   <div class="leave-details-card">
     <div class="leave-header-row">
-      <svg class="leave-icon" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="20" r="20" fill="#c7f0fe"/>
-        <path d="M15 18h10M15 22h8" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
-        <rect x="10" y="13" width="20" height="14" rx="3" stroke="#2563eb" stroke-width="2" fill="#e0f2fe"/>
-      </svg>
       <span class="leave-title">Employee Leave Details</span>
     </div>
+
     <div class="leave-searchbar">
       <input
         type="text"
@@ -19,6 +27,7 @@
         <path d="M13.5 13.5L18 18" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </div>
+
     <div class="table-container">
       <table class="leave-table">
         <thead>

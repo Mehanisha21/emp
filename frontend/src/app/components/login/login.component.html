@@ -4,6 +4,7 @@
     <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="login-form" novalidate>
       <h2 class="login-title">Login</h2>
 
+      <!-- Username Field -->
       <div class="form-group">
         <input
           id="username"
@@ -12,7 +13,7 @@
           [(ngModel)]="username"
           required
           #usernameInput="ngModel"
-          placeholder="&#x1F464; Enter your username"
+          placeholder="Enter your username"
           autocomplete="username"
           class="form-input"
         />
@@ -21,7 +22,8 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <!-- Password Field with Toggle Eye -->
+      <div class="form-group password-wrapper">
         <input
           id="password"
           name="password"
@@ -29,27 +31,24 @@
           [(ngModel)]="password"
           required
           #passwordInput="ngModel"
-          placeholder="&#x1F512; Enter your password"
+          placeholder="Enter your password"
           autocomplete="current-password"
           class="form-input"
         />
+
         <button type="button" class="toggle-password" (click)="togglePassword()" aria-label="Toggle password visibility">
-          {{ showPassword ? 'Hide' : 'Show' }}
+          <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
         </button>
+
         <div *ngIf="passwordInput.invalid && passwordInput.touched" class="validation-error">
           Password is required.
         </div>
       </div>
 
-      <div class="form-options">
-        <label>
-          <input type="checkbox" name="rememberMe" />
-          Remember me
-        </label>
-      </div>
-
+      <!-- Error Message -->
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
+      <!-- Submit Button -->
       <button type="submit" [disabled]="loading || loginForm.invalid" class="login-button">
         {{ loading ? 'Logging in...' : 'Login Now' }}
       </button>

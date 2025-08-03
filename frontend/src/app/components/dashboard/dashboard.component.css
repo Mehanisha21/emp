@@ -1,329 +1,105 @@
 .dashboard-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f3f2f1;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 220px;
-  background-color: #4b5563;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  transition: width 0.3s ease;
-  overflow: hidden;
-  z-index: 1000;
-}
-
-.sidebar.collapsed {
-  width: 60px;
-}
-
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-  margin-bottom: 1rem;
-}
-
-.toggle-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1;
-}
-
-.sidebar li {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
-  font-size: 1rem;
-  white-space: nowrap;
-}
-
-.sidebar li.active, .sidebar li:hover {
-  background-color: #374151;
-}
-
-.sidebar li:hover .icon {
-  color: #fbbf24;
-}
-
-.sidebar li .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.75rem;
-  font-size: 1.25rem;
-  min-width: 24px;
-  text-align: center;
-  color: white;
-}
-
-.sidebar.collapsed li .text {
-  display: none;
-}
-
-/* Style specifically for the logout item */
-.logout-item {
-  margin-top: auto;
-  border-top: 1px solid rgba(255,255,255,0.25);
-  color: white;
-}
-
-.logout-item:hover {
-  background-color: #a16207;
-  color: #fbbf24;
-}
-
-.main-content {
-  margin-left: 220px;
-  flex-grow: 1;
-  padding: 1rem 1.5rem;
-  background-color: #ffffff;
-  color: #1f2937;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  transition: margin-left 0.3s ease;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.main-content.expanded {
-  margin-left: 60px;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .topbar {
-  border-bottom: 1px solid #e1dfdd;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #323130;
-  margin-top: 0;
-  padding-top: 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.topbar-title {
+  font-size: 2rem;
+  color: #1f2937;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .cards-container {
   display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
+  gap: 1.5rem;
+  
 }
 
 .card {
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-  cursor: pointer;
-  flex: 1 1 250px;
-  max-width: 280px;
-  min-width: 240px;
-  text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  background: white;
-  color: #1f2937;
-}
-
-.card:hover {
-  box-shadow: 0 10px 24px rgba(30, 115, 250, 0.3);
-  transform: translateY(-8px);
-}
-
-/* PROFILE CARD */
-.profile-card {
-  position: relative;
-  overflow: hidden;
-  background: none;
-  border: 1px solid #fbbf24;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
   height: 250px;
-  max-width: 250px;
-  padding-bottom: 1rem;
+  flex: 1 1 260px;
+  max-width: 350px;
+  min-width: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #fff;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
 }
 
-.profile-card .profile-background {
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.card h3 {
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.card-background {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('/assets/images/profile.jpg') center center/cover no-repeat;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
   opacity: 0.95;
-  filter: brightness(0.85) saturate(110%) blur(0.5px);
+  filter: brightness(0.85) saturate(1.2);
   transition: filter 0.3s ease;
 }
 
-.profile-card:hover .profile-background {
-  filter: brightness(1) saturate(130%) blur(0.3px);
+.card:hover .card-background {
+  filter: brightness(1) saturate(1.3);
 }
 
-.profile-card h3 {
-  position: relative;
-  z-index: 2;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  background: rgba(30, 40, 60, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(32, 34, 40, 0.35);
-  font-weight: 700;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
-  user-select: none;
-  pointer-events: none;
+.profile-bg {
+  background-image: url('/assets/images/profile.jpg');
+  border: 2px solid #fbbf24;
 }
 
-/* LEAVE CARD */
-.leave-card {
-  position: relative;
-  overflow: hidden;
-  color: #fff;
+.leave-bg {
+  background-image: url('/assets/images/leave.jpg');
   border: 2px solid #3b82f6;
-  background: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 250px;
-  max-width: 280px;
-  padding-bottom: 1rem;
-  cursor: pointer;
 }
 
-.leave-card .leave-background {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/assets/images/leave.jpg') center center/cover no-repeat;
-  opacity: 0.92;
-  filter: brightness(0.90) saturate(118%) blur(0.7px);
-  z-index: 1;
-  transition: filter 0.3s;
-}
-
-.leave-card:hover .leave-background {
-  filter: brightness(1.04) saturate(130%) blur(0.4px);
-}
-
-.leave-card h3 {
-  position: relative;
-  z-index: 2;
-  background: rgba(30, 40, 60, 0.52);
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
-  font-weight: 700;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  color: #fff;
-  margin: 0 0 1rem 0;
-  box-shadow: 0 2px 8px rgba(60,100,255,0.15);
-  user-select: none;
-  pointer-events: none;
-}
-
-/* PAYSLIP CARD */
-.payslip-card {
-  position: relative;
-  overflow: hidden;
+.payslip-bg {
+  background-image: url('/assets/images/pay.jpg');
   border: 2px solid #10b981;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 250px;
-  max-width: 280px;
-  padding-bottom: 1rem;
-  cursor: pointer;
-  background: none;
-}
-
-.payslip-card .payslip-background {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: url('/assets/images/pay.jpg') center center/cover no-repeat;
-  opacity: 0.93;
-  filter: brightness(0.87) saturate(124%) blur(0.65px);
-  z-index: 1;
-  transition: filter 0.3s;
-}
-
-.payslip-card:hover .payslip-background {
-  filter: brightness(1.06) saturate(137%) blur(0.3px);
-}
-
-.payslip-card h3 {
-  position: relative;
-  z-index: 2;
-  background: rgba(30, 40, 60, 0.52);
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
-  font-weight: 700;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  color: #fff;
-  margin: 0 0 1rem 0;
-  box-shadow: 0 2px 8px rgba(60,100,255,0.15);
-  user-select: none;
-  pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .cards-container {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
   }
+
   .card {
-    max-width: 90vw;
-    min-width: auto;
-  }
-  .main-content {
-    margin-left: 0 !important;
-    padding: 1rem;
-  }
-  .sidebar {
-    position: relative;
     width: 100%;
+    max-width: 90vw;
     height: auto;
   }
 }

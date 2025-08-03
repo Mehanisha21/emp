@@ -1,42 +1,24 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
   standalone: true,
-  imports: [RouterModule, RouterOutlet]
+  imports: [CommonModule, RouterModule, RouterOutlet, SidebarComponent]
 })
 export class LayoutComponent {
-  isCollapsed = false;
-
-  constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event.constructor.name === "NavigationEnd") {
-        const currentUrl = (event as any).urlAfterRedirects;
-        if (currentUrl === '/dashboard') {
-          this.isCollapsed = true;
-        } else {
-          this.isCollapsed = false;
-        }
-      }
-    });
-  }
+  sidebarOpen = true;
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   closeSidebar() {
-    if (this.isCollapsed) {
-      this.isCollapsed = false;
-    }
+    this.sidebarOpen = false;
   }
 
-  logout() {
-    // Implement logout logic here
-    this.router.navigate(['/login']);
-  }
 }

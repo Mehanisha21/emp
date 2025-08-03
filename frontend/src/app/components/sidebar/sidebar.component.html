@@ -1,31 +1,88 @@
-<nav class="sidebar" [class.collapsed]="isCollapsed">
-  <div class="sidebar-header">
-    <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar" title="Toggle sidebar">
-      <span *ngIf="isCollapsed" class="close-cursor">&#9776;</span>
-      <span *ngIf="!isCollapsed">&#10005;</span>
-    </button>
-    <h2 *ngIf="!isCollapsed" class="portal-title">EMPLOYEE PORTAL</h2>
+<nav
+  class="sidebar"
+  [class.collapsed]="isCollapsed"
+  [class.expanded]="!isCollapsed"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  aria-label="Primary Navigation Sidebar"
+>
+  <!-- Logo & App Name -->
+  <div class="sidebar-logo">
+    <img src="assets/icon.png" alt="App Logo" class="logo-icon" />
+    @if (!isCollapsed) {
+      <span class="logo-text">Employee Portal</span>
+    }
   </div>
-  <ul>
-    <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+
+  <!-- Navigation Menu -->
+  <ul role="menu" class="menu-list">
+    <li
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      role="menuitem"
+      [attr.title]="isCollapsed ? 'Home' : null"
+    >
       <span class="icon"><i class="fas fa-home"></i></span>
-      <span class="text" *ngIf="!isCollapsed">Home</span>
+      @if (!isCollapsed) {
+        <span class="text">Home</span>
+      }
     </li>
-    <li routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+
+    <li
+      routerLink="/profile"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      role="menuitem"
+      [attr.title]="isCollapsed ? 'Profile' : null"
+    >
       <span class="icon"><i class="fas fa-user"></i></span>
-      <span class="text" *ngIf="!isCollapsed">Profile</span>
+      @if (!isCollapsed) {
+        <span class="text">Profile</span>
+      }
     </li>
-    <li routerLink="/leave-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+
+    <li
+      routerLink="/leave-request"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      role="menuitem"
+      [attr.title]="isCollapsed ? 'Leave Request' : null"
+    >
       <span class="icon"><i class="fas fa-calendar-check"></i></span>
-      <span class="text" *ngIf="!isCollapsed">Leave Request</span>
+      @if (!isCollapsed) {
+        <span class="text">Leave Request</span>
+      }
     </li>
-    <li routerLink="/payslip" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+
+    <li
+      routerLink="/payslip"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      role="menuitem"
+      [attr.title]="isCollapsed ? 'Payslip' : null"
+    >
       <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
-      <span class="text" *ngIf="!isCollapsed">Payslip</span>
-    </li>
-    <li (click)="logout()" class="logout-item" role="button" tabindex="0" (keydown.enter)="logout()" (keydown.space)="logout()">
-      <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-      <span class="text" *ngIf="!isCollapsed">Logout</span>
+      @if (!isCollapsed) {
+        <span class="text">Payslip</span>
+      }
     </li>
   </ul>
+
+  <!-- Fixed Logout -->
+  <div
+    class="logout-fixed"
+    (click)="logout()"
+    role="button"
+    tabindex="0"
+    (keydown.enter)="logout()"
+    (keydown.space)="logout()"
+    [attr.title]="isCollapsed ? 'Logout' : null"
+    aria-label="Logout"
+  >
+    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+    @if (!isCollapsed) {
+      <span class="text">Logout</span>
+    }
+  </div>
 </nav>
