@@ -1,0 +1,118 @@
+<div class="wide-payslip-bg">
+  <ng-container *ngIf="payslipRecords && payslipRecords.length; else loadingOrError">
+    <div class="wide-payslip-card" *ngFor="let record of payslipRecords">
+      <div class="wide-payslip-header">
+        <svg class="wide-payslip-icon" viewBox="0 0 46 46">
+          <ellipse cx="23" cy="23" rx="22" ry="22" fill="#ecf7f9"/>
+          <rect x="10" y="19" width="26" height="10" rx="5" fill="#399ddf"/>
+          <rect x="15" y="13" width="16" height="6" rx="3" fill="#f3fafc"/>
+        </svg>
+        <div>
+          <div class="wide-payslip-title">Employee Payslip</div>
+          <div class="wide-payslip-date">{{ record.Begda | date:'MMMM y' }}</div>
+        </div>
+        <button (click)="exportPDF(record)" class="export-btn">Export PDF</button>
+        <button (click)="viewPDF(record)" class="print-btn" title="View PDF for Print">
+          Print
+        </button>
+        <button (click)="openEmailModal(record)" class="email-btn" [disabled]="emailSending">Send Email</button>
+      </div>
+      <div class="wide-payslip-details">
+        <div class="wide-field">
+          <span class="field-label">Personnel Number:</span>
+          <span class="field-value">{{ record.Pernr }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Company Code:</span>
+          <span class="field-value">{{ record.Bukrs }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Cost Center:</span>
+          <span class="field-value">{{ record.Kostl }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">First Name:</span>
+          <span class="field-value">{{ record.Vorna }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Gender:</span>
+          <span class="field-value">{{ record.Gesch }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Birth Date:</span>
+          <span class="field-value">{{ record.Gbdat | date:'mediumDate' }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Nationality:</span>
+          <span class="field-value">{{ record.Natio }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Transfer Group:</span>
+          <span class="field-value">{{ record.Trfgr }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Transfer Status:</span>
+          <span class="field-value">{{ record.Trfst }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Base pay:</span>
+          <span class="field-value">{{ record.Bet02 | number:'1.2-2' }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Incentives:</span>
+          <span class="field-value">{{ record.Betrg | number:'1.2-2' }}</span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Allowance:</span>
+          <span class="field-value">{{ record.Bet01 | number:'1.2-2' }}</span>
+        </div>
+        <div class="wide-field total-row">
+          <span class="field-label">Total Amount:</span>
+          <span class="field-value total-value">
+            {{ record.Total | number:'1.2-2' }} {{ record.Waers }}
+          </span>
+        </div>
+        <div class="wide-field">
+          <span class="field-label">Division:</span>
+          <span class="field-value">{{ record.Divgv }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingOrError>
+    <div class="wide-payslip-card" style="text-align:center">
+      <div *ngIf="errorMessage; else loading" class="error">{{ errorMessage }}</div>
+      <ng-template #loading>
+        <div class="loading-payslip">Loading pay slips...</div>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
+
+<div *ngIf="emailPromptVisible" class="popup-backdrop">
+  <div class="email-popup">
+    <p>Enter an email address to send the payslip:</p>
+    <input type="email" [(ngModel)]="emailInput" placeholder="Enter email address" />
+    <div class="button-row">
+      <button (click)="sendPayslipEmail()" class="send-btn" [disabled]="!emailInput || emailSending">
+        {{ emailSending ? 'Sending...' : 'Send' }}
+      </button>
+      <button (click)="closeEmailModal()" class="cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="emailSuccessPopupVisible" class="popup-backdrop">
+  <div class="popup">
+    <p>📧 Payslip has been sent to your email.</p>
+    <button (click)="closeEmailSuccessPopup()">OK</button>
+  </div>
+</div>
+
+<div *ngIf="emailErrorPopupVisible" class="popup-backdrop">
+  <div class="popup">
+    <p>⚠️ Failed to send payslip email.</p>
+    <button (click)="closeEmailErrorPopup()">OK</button>
+  </div>
+</div>

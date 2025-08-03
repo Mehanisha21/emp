@@ -1,0 +1,107 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f2f1;
+  margin-top: 0;
+  padding-top: 0;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 220px;
+  background-color: #4b5563;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  transition: width 0.3s ease;
+  overflow: hidden;
+  z-index: 1000;
+}
+.sidebar.collapsed {
+  width: 60px;
+}
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  margin-bottom: 1rem;
+}
+.toggle-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+.sidebar li {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.sidebar li.active, .sidebar li:hover {
+  background-color: #374151;
+}
+.sidebar li:hover .icon {
+  color: #fbbf24;
+}
+.sidebar li .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  min-width: 24px;
+  text-align: center;
+  color: white;
+}
+.sidebar.collapsed li .text {
+  display: none;
+}
+/* Style specifically for the logout item */
+.logout-item {
+  margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,0.25);
+  color: white;
+}
+.logout-item:hover {
+  background-color: #a16207;
+  color: #fbbf24;
+}
+.main-content {
+  margin-left: 220px;
+  flex-grow: 1;
+  padding: 1.5rem 2rem;
+  background-color: #e0e7ff;
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease;
+  margin-top: 0;
+  padding-top: 0;
+}
+.main-content.expanded {
+  margin-left: 60px;
+}

@@ -1,0 +1,27 @@
+<app-sidebar></app-sidebar>
+<div class="profile-card-main" *ngIf="profile; else loadingOrError">
+  <div class="profile-img-bg">
+    <svg class="profile-svg" viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="32" fill="#314361"/>
+      <ellipse cx="32" cy="26" rx="12" ry="13" fill="#b6bac1"/>
+      <ellipse cx="32" cy="47" rx="19" ry="11" fill="#b6bac1"/>
+    </svg>
+  </div>
+  <h2 class="profile-name">{{ profile.Vorna }} {{ profile.Nachn }}</h2>
+  <div class="profile-title">{{ profile.Locat }}</div>
+  <div class="profile-details">
+    <div class="profile-detail-row" *ngFor="let field of profileFields">
+      <span class="profile-line">
+        {{ field.label }} : {{ profile[field.key] }}
+      </span>
+    </div>
+  </div>
+</div>
+<ng-template #loadingOrError>
+  <div *ngIf="errorMessage; else loading">
+    <p class="error">{{ errorMessage }}</p>
+  </div>
+  <ng-template #loading>
+    <p>Loading profile...</p>
+  </ng-template>
+</ng-template>

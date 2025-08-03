@@ -1,0 +1,20 @@
+<div class="dashboard-container">
+  <header class="topbar">
+    <h1>Dashboard</h1>
+  </header>
+  <div *ngIf="showCards" class="cards-container">
+    <div class="card profile-card" (click)="goToProfile()">
+      <div class="profile-background"></div>
+      <h3>Profile View</h3>
+    </div>
+    <div class="card leave-card" (click)="goToLeaveRequest()">
+      <div class="leave-background"></div>
+      <h3>Leave Data</h3>
+    </div>
+    <div class="card payslip-card" (click)="goToPaySlip()">
+      <div class="payslip-background"></div>
+      <h3>Payslip</h3>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

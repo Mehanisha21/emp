@@ -1,0 +1,31 @@
+<nav class="sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar" title="Toggle sidebar">
+      <span *ngIf="isCollapsed" class="close-cursor">&#9776;</span>
+      <span *ngIf="!isCollapsed">&#10005;</span>
+    </button>
+    <h2 *ngIf="!isCollapsed" class="portal-title">EMPLOYEE PORTAL</h2>
+  </div>
+  <ul>
+    <li routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="icon"><i class="fas fa-home"></i></span>
+      <span class="text" *ngIf="!isCollapsed">Home</span>
+    </li>
+    <li routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="icon"><i class="fas fa-user"></i></span>
+      <span class="text" *ngIf="!isCollapsed">Profile</span>
+    </li>
+    <li routerLink="/leave-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="icon"><i class="fas fa-calendar-check"></i></span>
+      <span class="text" *ngIf="!isCollapsed">Leave Request</span>
+    </li>
+    <li routerLink="/payslip" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
+      <span class="text" *ngIf="!isCollapsed">Payslip</span>
+    </li>
+    <li (click)="logout()" class="logout-item" role="button" tabindex="0" (keydown.enter)="logout()" (keydown.space)="logout()">
+      <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+      <span class="text" *ngIf="!isCollapsed">Logout</span>
+    </li>
+  </ul>
+</nav>

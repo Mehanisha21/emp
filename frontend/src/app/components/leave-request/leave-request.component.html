@@ -1,0 +1,56 @@
+<div class="leave-data-wrapper">
+  <div class="leave-details-card">
+    <div class="leave-header-row">
+      <svg class="leave-icon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="20" fill="#c7f0fe"/>
+        <path d="M15 18h10M15 22h8" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+        <rect x="10" y="13" width="20" height="14" rx="3" stroke="#2563eb" stroke-width="2" fill="#e0f2fe"/>
+      </svg>
+      <span class="leave-title">Employee Leave Details</span>
+    </div>
+    <div class="leave-searchbar">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        class="leave-search-input"
+        placeholder="Search leave type" />
+      <svg class="search-icon" viewBox="0 0 20 20">
+        <circle cx="9" cy="9" r="7" stroke="#2563eb" stroke-width="2" fill="none"/>
+        <path d="M13.5 13.5L18 18" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="table-container">
+      <table class="leave-table">
+        <thead>
+          <tr>
+            <th>Personnel #</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Days</th>
+            <th>Balance</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of filteredLeaves()">
+            <td>{{row.personnel}}</td>
+            <td>{{row.type}}</td>
+            <td>{{row.start}}</td>
+            <td>{{row.end}}</td>
+            <td>{{row.days}}</td>
+            <td>
+              <span [ngClass]="{'balance-neg': row.balance < 0, 'balance-pos': row.balance >= 0}">
+                {{row.balance}}
+              </span>
+            </td>
+            <td>{{row.desc}}</td>
+          </tr>
+          <tr *ngIf="filteredLeaves().length === 0">
+            <td colspan="7" class="no-record-text">No records found for "{{searchTerm}}"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

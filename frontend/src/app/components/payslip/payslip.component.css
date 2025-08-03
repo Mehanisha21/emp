@@ -1,0 +1,269 @@
+.wide-payslip-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg,#e0f7fa 60%,#d3cce3 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.9rem 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.wide-payslip-card {
+  background: rgba(255,255,255,0.97);
+  border-radius: 17px;
+  box-shadow: 0 8px 44px #205b9c14, 0 2px 12px #397ac70a;
+  backdrop-filter: blur(10px) saturate(117%);
+  padding: 2.15rem 3.3rem 1.7rem 3.3rem;
+  max-width: 650px;
+  width: 100%;
+  margin-bottom: 2.5rem;
+  border: 1.4px solid #182f4455;
+  animation: fadeIn .8s cubic-bezier(.55,1.85,.23,.98);
+  position: relative;
+}
+.wide-payslip-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  margin-bottom: 2.0rem;
+  border-bottom: 1.7px solid #e1eafd;
+  padding-bottom: 1.09rem;
+}
+.wide-payslip-icon {
+  min-width: 53px;
+  width: 53px;
+  height: 53px;
+}
+.wide-payslip-title {
+  font-size: 1.82rem;
+  font-weight: 700;
+  color: #215083;
+  margin-bottom: 0.21em;
+  letter-spacing: .03em;
+}
+.wide-payslip-date {
+  font-size: 1.1rem;
+  color: #4478bd;
+  font-weight: 500;
+  margin-top: .03em;
+  margin-bottom: .15em;
+  text-shadow: 0 1px 6px #e3f5ff41;
+}
+.export-btn, .print-btn, .email-btn {
+  margin-left: 1em;
+  margin-top: .5em;
+  background: linear-gradient(99deg, #257cc8 70%, #5bded9 140%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .7em 1.7em;
+  font-size: 1em;
+  font-weight: 700;
+  box-shadow: 0 2px 8px #60c8ff24;
+  cursor: pointer;
+  transition: background 0.14s, box-shadow 0.14s;
+  height: 2.7em;
+  min-width: 7em;
+  z-index: 2;
+}
+.print-btn {
+  background: linear-gradient(90deg, #1bbb7a 60%, #21d6b6 140%);
+}
+.email-btn {
+  background: linear-gradient(90deg, #7c4dff 60%, #c362ff 140%);
+}
+.export-btn:disabled, .print-btn:disabled, .email-btn:disabled {
+  background: #c3e0f3;
+  color: #ecf8ff;
+  cursor: not-allowed;
+  opacity: .64;
+  box-shadow: none;
+}
+.wide-payslip-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 1.35rem;
+  margin-top: 1.2rem;
+  font-size: 1.19rem;
+}
+.wide-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .29em .04em .31em 0;
+  border-bottom: 1px dashed #b1cce528;
+  color: #194050;
+  border-radius: 3px;
+  background: transparent;
+}
+.wide-field.total-row {
+  grid-column: span 2;
+  font-size: 1.3rem;
+  background: linear-gradient(90deg,#e5f8ee 60%,#e9f5ed 100%);
+  font-weight: 800;
+  border-radius: 8px;
+  margin: 1.11em 0 0.44em 0;
+  padding: .76em .35em;
+  color: #13595f;
+  border-bottom: none;
+}
+.field-label {
+  color: #1372ba;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: left;
+  min-width: 42%;
+  opacity: 0.97;
+}
+.field-value {
+  color: #223154;
+  text-align: right;
+  font-weight: 600;
+  font-size: 1.14em;
+  opacity: 0.97;
+  max-width: 53%;
+  word-break: break-word;
+  padding-left: .6em;
+}
+.total-value {
+  color: #16a876;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 0 #f3ffe8;
+  font-size: 1.15em;
+}
+.error {
+  color: #e01844;
+  text-align: center;
+  font-size: 1.16rem;
+  font-weight: 700;
+  padding: 2em 0;
+}
+.loading-payslip {
+  font-size: 1.09rem;
+  color: #155fa0;
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}
+/* Styles for custom popup */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.popup {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.popup p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.popup button {
+  background: #399ddf;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.popup button:hover {
+  background: #2b7bb8;
+}
+.email-popup {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  max-width: 450px;
+  width: 90%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.email-popup p {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  color: #333;
+}
+.email-popup input {
+  width: calc(100% - 2rem);
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+.email-popup input:focus {
+  outline: none;
+  border-color: #399ddf;
+  box-shadow: 0 0 0 2px rgba(57, 157, 223, 0.2);
+}
+.email-popup .button-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.email-popup .send-btn {
+  background: linear-gradient(90deg, #7c4dff 60%, #c362ff 140%);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.email-popup .send-btn:hover {
+  background: linear-gradient(90deg, #6438e0 60%, #a448d3 140%);
+}
+.email-popup .send-btn:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+.email-popup .cancel-btn {
+  background: #e0e0e0;
+  color: #666;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.email-popup .cancel-btn:hover {
+  background: #ccc;
+}
+@media (max-width: 900px) {
+  .wide-payslip-card {
+    padding: 1rem .42rem .9rem 0.72rem;
+    max-width: 99vw;
+  }
+  .wide-payslip-header { gap: .57rem; padding-bottom: .89rem;}
+  .wide-payslip-title { font-size: 1.31rem; }
+  .wide-payslip-details { grid-template-columns: 1fr; font-size: 1.04rem; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(55px);}
+  to { opacity: 1; transform: none;}
+}
