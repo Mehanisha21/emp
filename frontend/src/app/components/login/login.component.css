@@ -8,7 +8,6 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
     visibility: hidden;
 }
 
-
 .login-wrapper {
   display: flex;
   min-height: 100vh;
@@ -19,13 +18,14 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   flex: 1;
   background: url('/assets/images/login.jpg') no-repeat center center;
   background-size: cover;
+  position: relative;
 }
 
 .login-left::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.15);  /* Lighter overlay—background shows much brighter */
+  background: rgba(0, 0, 0, 0.15);
   z-index: 0;
   backdrop-filter: none;
 }
@@ -35,14 +35,14 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.7); /* Light black background outside login card */
+  background: linear-gradient(150deg, #3d3225, #929191, #f5dcc3);
   position: relative;
   padding: 2rem;
 }
 
 .login-form {
   position: relative;
-  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background inside login card */
+  background: rgba(255, 255, 255, 0.5);
   box-shadow: 0 8px 24px 0 rgba(31,38,135,0.12);
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.13);
@@ -53,6 +53,7 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   -webkit-backdrop-filter: blur(7px) saturate(120%);
   transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s ease;
 }
+
 .login-form:hover, .login-form:focus-within {
   background-color: rgba(195, 194, 194, 0.9);
   box-shadow:
@@ -64,13 +65,23 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 
 .login-title {
   margin-bottom: 2rem;
-  font-weight: 500; /* Lighter font weight for modern look */
-  font-size: 2.1rem;
-  color: #1f2937; /* Softer dark color */
+  font-weight: 600;
+  font-size: 2.4rem;
   text-align: center;
-  letter-spacing: 1.2px;
-  text-shadow: none;
+  letter-spacing: 1.5px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(90deg, #161616, #2c2b2b, #877779);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  transition: text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.login-title:hover {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
 }
 
 /* Optional: Logo/avatar */
@@ -87,99 +98,135 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
   background: #fff9;
 }
 
-
 /* Form Styling */
-form {
-    width: 100%;
-}
-
+/* Ensure form-group keeps consistent height and spacing during errors */
 .form-group {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 24px; /* Slightly reduced margin */
-    position: relative;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 24px;
+  position: relative;
+  min-height: 70px; /* fix height to avoid shifting when error appears */
 }
 
-.form-group label {
-    display: block;
-    font-size: 14px; /* Slightly smaller label */
-    color: #e0e0e0; /* Lighter label color */
-    margin-bottom: 7px; /* Slightly reduced margin */
-    font-weight: 500;
+/* Input and label remain aligned */
+.bordered-label {
+  position: relative;
+  margin-bottom: 24px;
 }
 
-.form-group .icon {
-    margin-right: 1px;
-    font-size: 13px; /* Slightly smaller icon */
+/* Input box styling */
+.bordered-label .form-input {
+  width: 100%;
+  padding: 18px 45px 10px 15px; /* Added right padding for toggle button space */
+  border: 1.8px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  color: #f9fafb;
+  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
 }
 
-.form-group input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px 15px 13px 15px; /* Slightly reduced padding */
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px; /* Slightly less rounded corners */
-    background: rgba(255, 255, 255, 0.08); /* More transparent background */
-    color: #f9fafb;
-    font-size: 1rem; /* Slightly smaller font size */
-    outline: none;
-    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
-    position: relative;
+/* On input focus */
+.bordered-label .form-input:focus {
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 10px 2px rgba(37, 99, 235, 0.4);
 }
 
-.form-group input.invalid {
-    border-color: #ff9999; /* Lighter error border */
-    background: rgba(255, 153, 153, 0.15); /* Lighter error background */
-}
-
-.form-group input::placeholder {
-    color: #d1d5db;
-    font-size: 15px;
-}
-
-.form-group input:focus {
-  border-color: #3b82f6;
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 8px #3b82f6aa;
-}
-
-.password-input-wrapper {
-    position: relative;
-}
-
-.toggle-password {
+/* Label positioning and style */
+.bordered-label label {
     position: absolute;
-    top: 50%;
-    right: 12px; /* Adjusted right position */
+    top: 30%;
+    left: 15px;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    height: 28px; /* Slightly smaller touch target */
-    width: 28px;
-    z-index: 2;
-    color: rgba(255, 255, 255, 0.7); /* Lighter icon color */
-    transition: color 0.2s;
+    padding: 0 5px;
+    color: #5c5c5c;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Label when input filled or focused */
+.bordered-label .form-input:focus + label,
+.bordered-label .form-input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 13px;
+  color: #007BFF;
+  font-weight: bold;
+  padding: 0 7px;
+}
+
+/* Placeholder hidden but present for validation */
+.bordered-label .form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.95rem;
+}
+
+/* Validation styling - border and background */
+.form-group input.invalid {
+  border-color: #dc2626; /* red border on error */
+  background: rgba(220, 38, 38, 0.15); /* light red background */
+}
+
+/* Validation error message spacing */
+.validation-error {
+  position: absolute;
+  bottom: -35px; /* place error below input */
+  left: 15px; 
+  font-size: 0.85rem;
+  color: #dc2626;
+  z-index: 3;
+}
+
+/* Password wrapper positioning */
+.password-input-wrapper {
+  position: relative;
+}
+
+/* Toggle password button positioning */
+.toggle-password {
+  top: 35%;
+  right: 12px;
+  transform: translateY(-50%);
+  height: 28px; /* height of icon button */
+  width: 28px;
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 2;
+  color: rgba(36, 36, 36, 0.7);
+  transition: color 0.2s;
 }
 
 .toggle-password:hover {
-   color: #ffffff;
+  color: #2563eb;
 }
 
 .toggle-password svg {
-    display: block;
+  display: block;
 }
+
 
 .validation-error,
 .error-message {
   color: #dc2626;
   font-size: 0.92rem;
-  margin-top: 0.3rem;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  margin-bottom: 30px;
 }
 
+/* Login button */
 button.login-button {
   width: 70%;
   padding: 0.55rem 0;
@@ -204,6 +251,7 @@ button.login-button:disabled {
   cursor: not-allowed;
 }
 
+/* Form bottom links */
 .login-form .form-bottom {
   margin-top: 1.3rem;
   text-align: center;
@@ -219,6 +267,4 @@ button.login-button:disabled {
 .login-form .form-bottom a:hover {
   color: #2563eb;
   text-decoration: none;
-  
 }
-

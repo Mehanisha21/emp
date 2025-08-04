@@ -4,49 +4,45 @@
     <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="login-form" novalidate>
       <h2 class="login-title">Login</h2>
 
-      <!-- Username Field -->
-      <div class="form-group">
-        <input
-          id="username"
-          name="username"
-          type="text"
-          [(ngModel)]="username"
-          required
-          #usernameInput="ngModel"
-          placeholder="Enter your username"
-          autocomplete="username"
-          class="form-input"
-        />
-        <div *ngIf="usernameInput.invalid && usernameInput.touched" class="validation-error">
-          Username is required.
-        </div>
-      </div>
-
-      <!-- Password Field with Toggle Eye -->
-      <div class="form-group password-wrapper">
-        <input
-          id="password"
-          name="password"
-          [type]="showPassword ? 'text' : 'password'"
-          [(ngModel)]="password"
-          required
-          #passwordInput="ngModel"
-          placeholder="Enter your password"
-          autocomplete="current-password"
-          class="form-input"
-        />
-
-        <button type="button" class="toggle-password" (click)="togglePassword()" aria-label="Toggle password visibility">
-          <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-        </button>
-
-        <div *ngIf="passwordInput.invalid && passwordInput.touched" class="validation-error">
-          Password is required.
-        </div>
-      </div>
-
       <!-- Error Message -->
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      
+      <!-- Username Field -->
+      <div class="form-group bordered-label">
+      <input
+        id="username"
+        name="username"
+        type="text"
+        [(ngModel)]="username"
+        required
+        #usernameInput="ngModel"
+        placeholder=" "
+        autocomplete="username"
+        class="form-input"/>
+      <label for="username">Username</label>
+      <div *ngIf="usernameInput.invalid && usernameInput.touched" class="validation-error">
+        Username is required.
+      </div>
+    </div>
+      <div class="form-group bordered-label password-wrapper">
+          <input
+            id="password"
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            required
+            #passwordInput="ngModel"
+            placeholder=""
+            autocomplete="current-password"
+            class="form-input"/>
+          <label for="password">Password</label>
+          <button type="button" class="toggle-password" (click)="togglePassword()" aria-label="Toggle password visibility">
+            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+          <div *ngIf="passwordInput.invalid && passwordInput.touched" class="validation-error">
+              Password is required.
+            </div>
+          </div>
 
       <!-- Submit Button -->
       <button type="submit" [disabled]="loading || loginForm.invalid" class="login-button">
