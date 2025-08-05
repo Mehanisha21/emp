@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 interface LeaveRow {
   personnel: string;
@@ -20,17 +21,25 @@ interface LeaveRow {
   templateUrl: './leave-request.component.html',
   styleUrls: ['./leave-request.component.css']
 })
+
 export class LeaveRequestComponent implements OnInit {
   leaves: LeaveRow[] = [];
   searchTerm = '';
   errorMessage = '';
 
-  private apiUrl = 'http://localhost:3000/api/leaves'; // adjust if needed
+  private apiUrl = 'http://localhost:3000/api/leaves';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.http.get<LeaveRow[]>(this.apiUrl).subscribe({
+
+    const persno = this.authService.getPersno();
+    if (!persno) {
+      this.errorMessage = 'No logged in user found.';
+      return;
+    }
+
+    this.http.get<any>(`${this.apiUrl}?pernr=${persno}`).subscribe({
       next: (data) => this.leaves = data,
       error: (err) => {
         console.error(err);
