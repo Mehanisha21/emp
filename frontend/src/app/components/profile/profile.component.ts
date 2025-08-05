@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
       this.errorMessage = 'No logged in user found.';
       return;
     }
+    
     this.http.get<any>(`${this.profileUrl}?pernr=${persno}`).subscribe({
       next: (response) => {
         if (response && response.success !== false) {
