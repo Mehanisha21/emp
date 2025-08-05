@@ -37,7 +37,11 @@ export class LeaveRequestComponent implements OnInit {
   searchTerm = '';
   errorMessage = '';
 
+<<<<<<< HEAD
+  private apiUrl = 'http://localhost:3000/api/leave'; // updated to match backend API with test pernr
+=======
   private apiUrl = 'http://localhost:3000/api/leaves';
+>>>>>>> 6b2b7d17454d5d091e21ac3700dea8ab7ae96919
 
   constructor(
     private http: HttpClient,
@@ -45,7 +49,21 @@ export class LeaveRequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const persno: string | null = this.authService.getPersno();
+<<<<<<< HEAD
+    this.http.get<any[]>(this.apiUrl).subscribe({
+      next: (data) => {
+        // Map backend data to frontend expected format
+        this.leaves = data.map(item => ({
+          personnel: item.Pernr,
+          type: item.Awart,
+          start: item.Begda,
+          end: item.Endda,
+          days: item.Abwtg,
+          balance: Number(item.Balance),
+          desc: item.Atext
+        }));
+      },
+=======
 
     if (!persno || !persno.trim()) {
       this.errorMessage = 'No logged in user found.';
